@@ -1,0 +1,6 @@
+management:
+  endpoints:
+    health.show-details: always
+    web.exposure.include: '*'
+
+infinispan.embedded.config-xml: infinispan.xml
