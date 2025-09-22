@@ -1,0 +1,13 @@
+infinispan:
+  remote:
+    server-list: 192.168.1.135:11222
+
+    # Security settings. Comment these properties if you are using a non secured server
+    auth-username: admin
+    auth-password: MedinaAzahara2468
+    
+    # activates statistics for actuator
+    statistics: true
+    jmx: true
+
+management.endpoints.web.exposure.include: '*'

@@ -1,21 +1,19 @@
 package org.infinispan.tutorial.simple.spring.remote;
 
+import java.util.Random;
+
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.protostream.GeneratedSchema;
 import org.infinispan.query.remote.client.ProtobufMetadataManagerConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.lang.invoke.MethodHandles;
-import java.util.Random;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 public class Reader {
-
-   private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
    private final BasqueNamesRepository repository;
    private final Random random;
@@ -33,8 +31,8 @@ public class Reader {
 
    @Scheduled(fixedDelay = 10000)
    public void retrieveSize() {
-      logger.info(">>>> Cache size " + remoteCacheManager.getCache(Data.BASQUE_NAMES_CACHE).size());
-      logger.info(">>>> Database size " + repository.size());
+      log.info(">>>> Cache size {}", remoteCacheManager.getCache(Data.BASQUE_NAMES_CACHE).size());
+      log.info(">>>> Database size {}",  repository.size());
    }
 
    @Scheduled(fixedDelay = 1000)
@@ -52,6 +50,6 @@ public class Reader {
    @Scheduled(fixedDelay = 1000)
    public void retrieveBasqueName() {
       int id = this.random.nextInt(Data.NAMES.size());
-      logger.info("FIND RESULT " + this.repository.findById(Integer.toString(id)));
+      log.info("FIND RESULT {}", this.repository.findById(Integer.toString(id)));
    }
 }

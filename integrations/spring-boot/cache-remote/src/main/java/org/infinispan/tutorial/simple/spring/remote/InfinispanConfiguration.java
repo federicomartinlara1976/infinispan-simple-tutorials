@@ -15,7 +15,7 @@ public class InfinispanConfiguration {
 
    @Bean
    @Order(Ordered.HIGHEST_PRECEDENCE)
-   public InfinispanRemoteCacheCustomizer caches() {
+   InfinispanRemoteCacheCustomizer caches() {
       return b -> {
          URI cacheConfigUri;
          try {
