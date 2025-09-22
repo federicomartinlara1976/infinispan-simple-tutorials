@@ -1,5 +1,8 @@
 package org.infinispan.tutorial.simple.spring.remote;
 
+import java.lang.invoke.MethodHandles;
+import java.util.Random;
+
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.protostream.GeneratedSchema;
@@ -8,12 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import reactor.core.Disposable;
-import reactor.core.publisher.Mono;
-
-import java.lang.invoke.MethodHandles;
-import java.time.Duration;
-import java.util.Random;
 
 @Component
 public class Reader {
