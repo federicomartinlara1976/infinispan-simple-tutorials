@@ -1,6 +1,6 @@
 package org.infinispan.tutorial.simple.spring.embedded;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -14,12 +14,12 @@ public class Reader {
 
    private final EmbeddedCacheManager cacheManager;
    private final BasqueNamesRepository repository;
-   private final Random random;
+   private final SecureRandom random;
 
    public Reader(BasqueNamesRepository repository, EmbeddedCacheManager embeddedCacheManager) {
       this.repository = repository;
       cacheManager = embeddedCacheManager;
-      this.random = new Random();
+      this.random = new SecureRandom();
    }
 
    @Scheduled(fixedDelay = 2000)

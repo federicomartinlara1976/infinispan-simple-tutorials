@@ -1,6 +1,6 @@
 package org.infinispan.tutorial.simple.spring.remote;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
@@ -16,12 +16,12 @@ import lombok.extern.slf4j.Slf4j;
 public class Reader {
 
    private final BasqueNamesRepository repository;
-   private final Random random;
+   private final SecureRandom random;
    private final RemoteCacheManager remoteCacheManager;
 
    public Reader(BasqueNamesRepository repository, RemoteCacheManager remoteCacheManager) {
       this.repository = repository;
-      random = new Random();
+      random = new SecureRandom();
       this.remoteCacheManager = remoteCacheManager;
       // Upload the generated schema in the server
       RemoteCache<String, String> metadataCache = this.remoteCacheManager.getCache(ProtobufMetadataManagerConstants.PROTOBUF_METADATA_CACHE_NAME);
