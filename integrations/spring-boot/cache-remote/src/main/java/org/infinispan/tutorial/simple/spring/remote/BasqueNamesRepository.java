@@ -15,27 +15,31 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BasqueNamesRepository {
 
-   private Map<String, BasqueName> database = new HashMap<>();
+	private Map<Integer, BasqueName> database = new HashMap<>();
 
-   @Cacheable()
-   public BasqueName findById(String id) {
-      log.info("Call database to FIND name by id '{}'", id);
-      return database.get(id);
-   }
+	@Cacheable()
+	public BasqueName findById(Integer id) {
+		if (id < 0 || id >= database.size()) {
+			throw new IndexOutOfBoundsException(id);
+		}
+		
+		log.info("Call database to FIND name by id '{}'", id);
+		return database.get(id);
+	}
 
-   public void create(String id, String name) {
-      log.info("Call database to CREATE name by id '{}'", id);
-      database.put(id, new BasqueName(id, name));
-   }
+	public void create(Integer id, String name) {
+		log.info("Call database to CREATE name by id '{}'", id);
+		database.put(id, new BasqueName(id, name));
+	}
 
-   @CacheEvict
-   public void removeById(String id) {
-      log.info("Call database to REMOVE name by id '{}'", id);
-      database.remove(id);
-   }
+	@CacheEvict
+	public void removeById(Integer id) {
+		log.info("Call database to REMOVE name by id '{}'", id);
+		database.remove(id);
+	}
 
-   public int size() {
-      return database.size();
-   }
+	public int size() {
+		return database.size();
+	}
 
 }
