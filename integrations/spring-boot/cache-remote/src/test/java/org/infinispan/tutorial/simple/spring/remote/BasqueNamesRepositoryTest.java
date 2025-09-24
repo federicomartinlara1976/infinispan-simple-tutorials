@@ -108,7 +108,7 @@ class BasqueNamesRepositoryTest {
         int invalidId = Data.NAMES.size();
 
         // When & Then - Debe lanzar IndexOutOfBoundsException
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             repository.findById(invalidId);
         });
     }
@@ -119,7 +119,7 @@ class BasqueNamesRepositoryTest {
         int negativeId = -1;
 
         // When & Then - Debe lanzar IndexOutOfBoundsException
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             repository.findById(negativeId);
         });
     }
