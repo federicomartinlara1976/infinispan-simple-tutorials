@@ -216,6 +216,22 @@ class BasqueNamesRepositoryTest {
     }
     
     @Test
+    void testRemoveWithInvalidIndex() {
+        // Given - Un ID negativo
+        Integer negativeId = -1;
+        Integer overflowIndex = repository.size();
+
+        // When & Then - Debe lanzar IllegalArgumentException
+        assertThrows(IllegalArgumentException.class, () -> {
+            repository.removeById(negativeId);
+        });
+        
+        assertThrows(IllegalArgumentException.class, () -> {
+            repository.removeById(overflowIndex);
+        });
+    }
+    
+    @Test
     void testSize() {
         // Given - La lista de nombres del repositorio Data
         
