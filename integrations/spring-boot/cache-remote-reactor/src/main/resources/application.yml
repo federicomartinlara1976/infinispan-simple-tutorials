@@ -1,0 +1,4 @@
+infinispan:
+  remote:
+    server-list: 192.168.1.135:11222
+    reactive: true
