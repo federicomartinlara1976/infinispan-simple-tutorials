@@ -1,21 +1,19 @@
 package org.infinispan.tutorial.simple.spring.remote;
 
-import java.lang.invoke.MethodHandles;
 import java.util.Random;
 
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.protostream.GeneratedSchema;
 import org.infinispan.query.remote.client.ProtobufMetadataManagerConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-@Component
-public class Reader {
+import lombok.extern.slf4j.Slf4j;
 
-   private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+@Component
+@Slf4j
+public class Reader {
 
    private final BasqueNamesRepository repository;
    private final Random random;
@@ -33,7 +31,7 @@ public class Reader {
 
    @Scheduled(fixedDelay = 10000)
    public void retrieveSize() {
-      logger.info(">>>> Cache size " + remoteCacheManager.getCache(Data.BASQUE_NAMES_CACHE).size());
+      log.info(">>>> Cache size {}", remoteCacheManager.getCache(Data.BASQUE_NAMES_CACHE).size());
    }
 
    @Scheduled(fixedDelay = 1000)
