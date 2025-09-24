@@ -48,13 +48,21 @@ public class Reader {
 
 	@Scheduled(fixedDelay = 3000)
 	public void removeOne() {
-		int id = this.random.nextInt(Data.NAMES.size());
-		this.repository.removeById(id);
+		try {
+			int id = this.random.nextInt(Data.NAMES.size());
+			this.repository.removeById(id);
+		} catch (IllegalArgumentException e) {
+			log.warn("Error: {}", e.getMessage());
+		}
 	}
 
 	@Scheduled(fixedDelay = 1000)
 	public void retrieveBasqueName() {
-		int id = this.random.nextInt(Data.NAMES.size());
-		log.info("FIND RESULT {}", this.repository.findById(id));
+		try {
+			Integer id = this.random.nextInt(Data.NAMES.size());
+			log.info("FIND RESULT {}", this.repository.findById(id));
+		} catch (IllegalArgumentException e) {
+			log.warn("Error: {}", e.getMessage());
+		}
 	}
 }
