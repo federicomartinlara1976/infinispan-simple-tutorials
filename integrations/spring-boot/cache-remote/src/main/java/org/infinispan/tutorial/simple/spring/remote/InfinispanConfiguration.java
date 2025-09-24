@@ -2,7 +2,9 @@ package org.infinispan.tutorial.simple.spring.remote;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Objects;
 
+import org.infinispan.client.hotrod.configuration.RemoteCacheConfigurationBuilder;
 import org.infinispan.commons.marshall.ProtoStreamMarshaller;
 import org.infinispan.spring.starter.remote.InfinispanRemoteCacheCustomizer;
 import org.infinispan.tutorial.simple.spring.remote.exceptions.ConfigurationException;
@@ -28,11 +30,13 @@ public class InfinispanConfiguration {
             throw new ConfigurationException(e);
          }
 
-         b.remoteCache(Data.BASQUE_NAMES_CACHE)
-                 .configurationURI(cacheConfigUri);
-
-         b.remoteCache(Data.BASQUE_NAMES_CACHE).marshaller(ProtoStreamMarshaller.class);
-
+         RemoteCacheConfigurationBuilder remoteCache = b.remoteCache(Data.BASQUE_NAMES_CACHE);
+         
+         if (!Objects.isNull(remoteCache)) {
+        	 remoteCache.configurationURI(cacheConfigUri);
+        	 remoteCache.marshaller(ProtoStreamMarshaller.class);
+         }
+         
          // Add marshaller in the client, the class is generated from the interface in compile time
          b.addContextInitializer(new BasquesNamesSchemaBuilderImpl());
       };
